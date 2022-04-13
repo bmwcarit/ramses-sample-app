@@ -1,0 +1,22 @@
+//  -------------------------------------------------------------------------
+//  Copyright (C) 2021 BMW AG
+//  -------------------------------------------------------------------------
+//  This Source Code Form is subject to the terms of the Mozilla Public
+//  License, v. 2.0. If a copy of the MPL was not distributed with this
+//  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+//  -------------------------------------------------------------------------
+
+ext.globalRepositoryDefinition = {
+    google()
+    mavenCentral()
+
+    //def gpr = ['usr' : 'USERNAME', 'key' : 'GH_PERSONAL_ACCESS_TOKEN']
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/bmwcarit/ramses-android")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") ?: System.getenv("GPR_TOKEN_READ")
+        }
+    }
+}

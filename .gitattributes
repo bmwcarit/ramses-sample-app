@@ -1,0 +1,2 @@
+*.rlogic	filter=lfs diff=lfs merge=lfs -text
+*.ramses	filter=lfs diff=lfs merge=lfs -text

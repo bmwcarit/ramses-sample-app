@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2022 BMW AG
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/vehicleFragmentSurfaceView">
+
+    <fragment
+        android:id="@+id/vehicleFragmentSurfaceView"
+        android:name="com.bmwgroup.ramsessample.fragments.VehicleFragmentSurfaceView"
+        android:label="fragment_surface_view"
+        tools:layout="@layout/fragment_surface_view" />
+    <fragment
+        android:id="@+id/fragmentImageView"
+        android:name="com.bmwgroup.ramsessample.fragments.FragmentImageView"
+        android:label="fragment_image_view"
+        tools:layout="@layout/fragment_image_view" />
+</navigation>
