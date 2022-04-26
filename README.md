@@ -22,7 +22,7 @@ If everything worked, you should see a 3D car as the first of two navigable frag
 
 ![Car](./doc/screenshot.png)
 
-The left fragment shows a surface with 3D view of a BMW X5 model. The right fragment shows a static
+The first fragment shows a surface with 3D view of a BMW X5 model. The second fragment shows a static
 logo image. It is possible to mix Ramses 3D content with other Android UI elements in various
 ways. Be creative!
 
