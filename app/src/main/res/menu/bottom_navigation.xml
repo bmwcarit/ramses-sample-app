@@ -7,11 +7,11 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/vehicleFragmentSurfaceView"
+        android:id="@+id/carView"
         android:icon="@drawable/ic_baseline_car_24"
-        android:title="SurfaceView" />
+        android:title="Car View" />
     <item
-        android:id="@+id/fragmentImageView"
+        android:id="@+id/logo"
         android:icon="@drawable/ic_car_outlined_24"
-        android:title="ImageView" />
+        android:title="Logo" />
 </menu>

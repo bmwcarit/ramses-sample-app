@@ -9,16 +9,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/vehicleFragmentSurfaceView">
+    app:startDestination="@id/carView">
 
     <fragment
-        android:id="@+id/vehicleFragmentSurfaceView"
-        android:name="com.bmwgroup.ramsessample.fragments.VehicleFragmentSurfaceView"
+        android:id="@+id/carView"
+        android:name="com.bmwgroup.ramsessample.fragments.FragmentCar"
         android:label="fragment_surface_view"
-        tools:layout="@layout/fragment_surface_view" />
+        tools:layout="@layout/fragment_car" />
     <fragment
-        android:id="@+id/fragmentImageView"
-        android:name="com.bmwgroup.ramsessample.fragments.FragmentImageView"
+        android:id="@+id/logo"
+        android:name="com.bmwgroup.ramsessample.fragments.FragmentLogo"
         android:label="fragment_image_view"
-        tools:layout="@layout/fragment_image_view" />
+        tools:layout="@layout/fragment_logo" />
 </navigation>

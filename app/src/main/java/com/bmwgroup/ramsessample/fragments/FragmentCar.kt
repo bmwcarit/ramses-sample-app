@@ -13,7 +13,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 
-class VehicleFragmentSurfaceView : Fragment(), SurfaceHolder.Callback {
+class FragmentCar : Fragment(), SurfaceHolder.Callback {
     private var mView: View? = null
     private lateinit var mSceneThread: VehicleSceneThread
     companion object {
@@ -24,7 +24,7 @@ class VehicleFragmentSurfaceView : Fragment(), SurfaceHolder.Callback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Only inflate the view, as it can not be relied upon that the view has been created yet
-        mView = inflater.inflate(R.layout.fragment_surface_view, container, false)
+        mView = inflater.inflate(R.layout.fragment_car, container, false)
         return mView
     }
 
@@ -77,10 +77,10 @@ class VehicleFragmentSurfaceView : Fragment(), SurfaceHolder.Callback {
             if (this::mSceneThread.isInitialized) {
                 mSceneThread.destroyRamsesBundleAndQuitThread()
             } else {
-                Log.e("VehicleFragmentSurfaceView", "onDestroyView failed to destroy RamsesBundle since it's not initialized.")
+                Log.e("FragmentCar", "onDestroyView failed to destroy RamsesBundle since it's not initialized.")
             }
         } catch (e: InterruptedException) {
-            Log.e("VehicleFragmentSurfaceView", "onDestroyView failed: ", e)
+            Log.e("FragmentCar", "onDestroyView failed: ", e)
         }
     }
 
@@ -93,7 +93,7 @@ class VehicleFragmentSurfaceView : Fragment(), SurfaceHolder.Callback {
             mSceneThread.renderingFramerate = 30f
             startRendering()
         } catch (e: InterruptedException) {
-            Log.e("VehicleFragmentSurfaceView", "surfaceCreated failed: ", e)
+            Log.e("FragmentCar", "surfaceCreated failed: ", e)
         }
     }
 
@@ -102,7 +102,7 @@ class VehicleFragmentSurfaceView : Fragment(), SurfaceHolder.Callback {
             if (mSceneThread.isAlive)
                 mSceneThread.destroyDisplay()
         } catch (e: InterruptedException) {
-            Log.e("VehicleFragmentSurfaceView", "surfaceDestroyed failed: ", e)
+            Log.e("FragmentCar", "surfaceDestroyed failed: ", e)
         }
     }
 
