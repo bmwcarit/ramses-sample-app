@@ -10,7 +10,7 @@ This is because the app uses a Ramses-Android AAR package that is uploaded to Gi
 For further information how to create a github authentication token take a look at the [githubs guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 Now you only need to use that token for this repo.
-For this to work just uncomment line 13 in the [repositories.gradle file](./repositories.gradle) and substitute the two strings "USERNAME" and
+For this to work just uncomment line 18 and 19 in the [gradle.properties file](./gradle.properties) and substitute the two strings "USERNAME" and
 "GH_PERSONAL_ACCESS_TOKEN" with your github username and the github personal access token.
 
 If everything worked, you should see a 3D car as the first of two navigable fragments:
