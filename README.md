@@ -10,7 +10,7 @@ v0.13.1. You can find a modifiable project with the car [on Github](https://gith
 If you want to build the app and experiment with the code you need a Github personal access token (PAT).
 The PAT is needed to fetch the Ramses Maven packages from the Github Packages registry.
 For further information how to create a Github PAT, take a look at the [githubs guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-To fetch packages, you need the 'read:packages' permission only.
+To fetch packages, the token needs the 'read:packages' permission only.
 
 Now you only need to use the PAT for this repo.
 For this to work just uncomment line 18 and 19 in the [gradle.properties file](./gradle.properties) and substitute the two strings "USERNAME" and
