@@ -99,7 +99,8 @@ class VehicleFragmentSurfaceView : Fragment(), SurfaceHolder.Callback {
 
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
         try {
-            m_sceneThread.destroyDisplay()
+            if (m_sceneThread.isAlive)
+                m_sceneThread.destroyDisplay()
         } catch (e: InterruptedException) {
             Log.e("VehicleFragmentSurfaceView", "surfaceDestroyed failed: ", e)
         }
