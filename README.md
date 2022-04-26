@@ -7,7 +7,7 @@ v0.13.1. You can find a modifiable project with the car [on Github](https://gith
 
 
 
-If you want to build the app and experimenting with the code you need a Github personal access token (PAT).
+If you want to build the app and experiment with the code you need a Github personal access token (PAT).
 The PAT is needed to fetch the Ramses Maven packages from the Github Packages registry.
 For further information how to create a Github PAT, take a look at the [githubs guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 To fetch packages, you need the 'read:packages' permission only.
