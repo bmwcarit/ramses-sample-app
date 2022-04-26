@@ -21,25 +21,25 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
         /*
          * Set the camera yaw and pitch values based on user input (also see input callbacks below)
          */
-        m_cameraYaw?.set(m_yawValue)
-        m_cameraPitch?.set(m_pitchValue)
+        mCameraYaw?.set(mYawValue)
+        mCameraPitch?.set(mPitchValue)
 
         /*
          * Open or close the doors based on bool value (also see input callbacks below)
          */
         val doorsValue: Float
-        if (m_allDoorsOpen) {
+        if (mAllDoorsOpen) {
             doorsValue = 1.0F
         }
         else
         {
             doorsValue = 0.0F
         }
-        m_doorL1?.set(doorsValue)
-        m_doorL2?.set(doorsValue)
-        m_doorR1?.set(doorsValue)
-        m_doorR2?.set(doorsValue)
-        m_trunk?.set(doorsValue)
+        mDoorL1?.set(doorsValue)
+        mDoorL2?.set(doorsValue)
+        mDoorR1?.set(doorsValue)
+        mDoorR2?.set(doorsValue)
+        mTrunk?.set(doorsValue)
     }
 
     /* Overrides the base class method which calls this based on thread scheduling
@@ -53,24 +53,24 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
             Log.e("RamsesSampleApp", "Loaded scene does not contain expected interface scripts!")
         }
         else {
-            m_cameraViewportW = cameraScriptRootInput.getChild("Viewport").getChild("Width")
-            m_cameraViewportH = cameraScriptRootInput.getChild("Viewport").getChild("Height")
-            m_cameraYaw = cameraScriptRootInput.getChild("CraneGimbal").getChild("Yaw")
-            m_cameraPitch = cameraScriptRootInput.getChild("CraneGimbal").getChild("Pitch")
+            mCameraViewportW = cameraScriptRootInput.getChild("Viewport").getChild("Width")
+            mCameraViewportH = cameraScriptRootInput.getChild("Viewport").getChild("Height")
+            mCameraYaw = cameraScriptRootInput.getChild("CraneGimbal").getChild("Yaw")
+            mCameraPitch = cameraScriptRootInput.getChild("CraneGimbal").getChild("Pitch")
 
             val yawOutput = getLogicNodeRootOutput("SceneControls").getChild("CameraPerspective").getChild("Yaw")
             val pitchOutput = getLogicNodeRootOutput("SceneControls").getChild("CameraPerspective").getChild("Pitch")
-            unlinkProperties(yawOutput, m_cameraYaw)
-            unlinkProperties(pitchOutput, m_cameraPitch)
-            m_doorL1 = doorsScriptRootInput.getChild("Door_F_L_OpeningValue")
-            m_doorL2 = doorsScriptRootInput.getChild("Door_B_L_OpeningValue")
-            m_doorR1 = doorsScriptRootInput.getChild("Door_F_R_OpeningValue")
-            m_doorR2 = doorsScriptRootInput.getChild("Door_B_R_OpeningValue")
-            m_trunk = doorsScriptRootInput.getChild("Tailgate_OpeningValue")
+            unlinkProperties(yawOutput, mCameraYaw)
+            unlinkProperties(pitchOutput, mCameraPitch)
+            mDoorL1 = doorsScriptRootInput.getChild("Door_F_L_OpeningValue")
+            mDoorL2 = doorsScriptRootInput.getChild("Door_B_L_OpeningValue")
+            mDoorR1 = doorsScriptRootInput.getChild("Door_F_R_OpeningValue")
+            mDoorR2 = doorsScriptRootInput.getChild("Door_B_R_OpeningValue")
+            mTrunk = doorsScriptRootInput.getChild("Tailgate_OpeningValue")
 
             /// Initialize values from the scene defaults; in real apps the values should come from the application logic
-            m_yawValue = m_cameraYaw?.float ?: 0f
-            m_pitchValue = m_cameraPitch?.float ?: 0f
+            mYawValue = mCameraYaw?.float ?: 0f
+            mPitchValue = mCameraPitch?.float ?: 0f
         }
     }
 
@@ -90,65 +90,65 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
     * This method is executed from the correct thread (the one which talks to ramses)
     */
     override fun onDisplayResize(width: Int, height: Int) {
-        m_cameraViewportW?.set(width)
-        m_cameraViewportH?.set(height)
-        m_screenWidth = width
-        m_screenHeight = height
+        mCameraViewportW?.set(width)
+        mCameraViewportH?.set(height)
+        mScreenWidth = width
+        mScreenHeight = height
     }
 
     fun toggleDoors() {
-        m_allDoorsOpen = !m_allDoorsOpen
+        mAllDoorsOpen = !mAllDoorsOpen
     }
 
     // Have to pass user code to addRunnableToThreadQueue to execute from the correct thread (the one which talks to ramses)
     fun onTouchDown(x: Int, y: Int) {
         addRunnableToThreadQueue {
-            m_prevX = x
-            m_prevY = y
-            m_touchDownX = x
-            m_touchDownY = y
+            mPrevX = x
+            mPrevY = y
+            mTouchDownX = x
+            mTouchDownY = y
         }
     }
 
     // Have to pass user code to addRunnableToThreadQueue to execute from the correct thread (the one which talks to ramses)
     fun onTouchUp() {
         addRunnableToThreadQueue { /// Point-touch -> switch door open/close state
-            m_prevX = -1
-            m_prevY = -1
+            mPrevX = -1
+            mPrevY = -1
         }
     }
 
     // Have to pass user code to addRunnableToThreadQueue to execute from the correct thread (the one which talks to ramses)
     fun onMotion(x: Int, y: Int) {
         addRunnableToThreadQueue { // Incrementally shift the pitch/yaw values based on change in pixel position relative to the screen size
-            val vpWidth = m_screenWidth
-            val vpHeight = m_screenHeight
-            val yawDiff = 100 * (m_prevX - x).toFloat() / vpWidth
-            val pitchDiff = 100 * (y - m_prevY).toFloat() / vpHeight
-            m_prevX = x
-            m_prevY = y
-            m_yawValue += yawDiff
-            m_pitchValue += pitchDiff
+            val vpWidth = mScreenWidth
+            val vpHeight = mScreenHeight
+            val yawDiff = 100 * (mPrevX - x).toFloat() / vpWidth
+            val pitchDiff = 100 * (y - mPrevY).toFloat() / vpHeight
+            mPrevX = x
+            mPrevY = y
+            mYawValue += yawDiff
+            mPitchValue += pitchDiff
         }
     }
 
-    private var m_yawValue = 0f
-    private var m_pitchValue = 0f
-    private var m_prevX = -1
-    private var m_prevY = -1
-    private var m_touchDownX = -1
-    private var m_touchDownY = -1
-    private var m_allDoorsOpen = false
-    private var m_screenWidth = 1
-    private var m_screenHeight = 1
+    private var mYawValue = 0f
+    private var mPitchValue = 0f
+    private var mPrevX = -1
+    private var mPrevY = -1
+    private var mTouchDownX = -1
+    private var mTouchDownY = -1
+    private var mAllDoorsOpen = false
+    private var mScreenWidth = 1
+    private var mScreenHeight = 1
 
-    private var m_cameraViewportW: Property? = null
-    private var m_cameraViewportH: Property? = null
-    private var m_cameraYaw: Property? = null
-    private var m_cameraPitch: Property? = null
-    private var m_doorL1: Property? = null
-    private var m_doorL2: Property? = null
-    private var m_doorR1: Property? = null
-    private var m_doorR2: Property? = null
-    private var m_trunk: Property? = null
+    private var mCameraViewportW: Property? = null
+    private var mCameraViewportH: Property? = null
+    private var mCameraYaw: Property? = null
+    private var mCameraPitch: Property? = null
+    private var mDoorL1: Property? = null
+    private var mDoorL2: Property? = null
+    private var mDoorR1: Property? = null
+    private var mDoorR2: Property? = null
+    private var mTrunk: Property? = null
 }
