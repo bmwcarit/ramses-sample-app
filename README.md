@@ -22,6 +22,10 @@ If everything worked, you should see a 3D car as the first of two navigable frag
 
 ![Car](./doc/screenshot.png)
 
+The first fragment shows a surface with 3D view of a BMW X5 model. The second fragment shows a static
+logo image. It is possible to mix Ramses 3D content with other Android UI elements in various
+ways. Be creative!
+
 # License
 
 The application source code is under the [MPL 2.0 license](./LICENSE.txt), the same license as the Ramses AAR,
