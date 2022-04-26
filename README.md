@@ -5,13 +5,18 @@ a 3D vehicle model of a BMW X5 (2018). The application is written in Kotlin and
 the vehicle resource is built using the [Ramses Composer](https://github.com/bmwcarit/ramses-composer) GUI
 v0.13.1. You can find a modifiable project with the car [on Github](https://github.com/bmwcarit/digital-car-3d).
 
-For building the app and experimenting with the code a github personal access token is necessary.
-This is because the app uses a Ramses-Android AAR package that is uploaded to GithubPackages and this requires a personal access token.
-For further information how to create a github authentication token take a look at the [githubs guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-Now you only need to use that token for this repo.
+
+If you want to build the app and experiment with the code you need a Github personal access token (PAT).
+The PAT is needed to fetch the Ramses Maven packages from the Github Packages registry.
+For further information how to create a Github PAT, take a look at the [githubs guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+To fetch packages, the token needs the 'read:packages' permission only.
+
+Now you only need to use the PAT for this repo.
 For this to work just uncomment line 18 and 19 in the [gradle.properties file](./gradle.properties) and substitute the two strings "USERNAME" and
-"GH_PERSONAL_ACCESS_TOKEN" with your github username and the github personal access token.
+"GH_PERSONAL_ACCESS_TOKEN" with your github username and the github personal access token. Be careful to
+not commit these credentials anywhere, the Github token is attributed to you and should not be given to
+others or shared.
 
 If everything worked, you should see a 3D car as the first of two navigable fragments:
 
