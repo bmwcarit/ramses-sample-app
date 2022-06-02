@@ -46,5 +46,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0'
     implementation "androidx.navigation:navigation-fragment-ktx:2.2.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.2.1"
-    implementation "com.bmwgroup.ramses:ramses-aar:1.0.0"
+    implementation "io.github.bmwcarit:ramses-aar:1.0.0"
 }
