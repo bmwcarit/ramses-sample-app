@@ -9,12 +9,4 @@
 ext.globalRepositoryDefinition = {
     google()
     mavenCentral()
-    maven {
-        name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/bmwcarit/ramses-android")
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-            password = project.findProperty("gpr.key") ?: System.getenv("GPR_TOKEN_READ")
-        }
-    }
 }
