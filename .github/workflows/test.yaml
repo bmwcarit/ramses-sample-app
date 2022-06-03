@@ -26,5 +26,5 @@ jobs:
       uses: gradle/gradle-build-action@v2
 
     - name: Build APKs
-      run: ./gradlew -p ./app :app:assembleDebug
+      run: ./gradlew :app:assembleDebug
 
