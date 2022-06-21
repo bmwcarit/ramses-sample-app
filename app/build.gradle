@@ -48,3 +48,13 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.2.1"
     implementation "io.github.bmwcarit:ramses-aar:1.0.0"
 }
+
+apply plugin: 'io.github.bmwcarit.RaCoPlugin'
+
+raCoConfig {
+    //UNCOMMENT the line below and the dependency at the bottom of the file after the path to RaCoHeadless is set.
+    //raCoHeadlessPath = 'PATH_TO_RACO_HEADLESS'
+    inputs = [['content/digital-car-3d/G05/G05_main.rca', 'app/src/main/assets/G05']]
+}
+
+//preBuild.dependsOn RaCoExport

@@ -9,4 +9,5 @@
 ext.globalRepositoryDefinition = {
     google()
     mavenCentral()
+    gradlePluginPortal()
 }
