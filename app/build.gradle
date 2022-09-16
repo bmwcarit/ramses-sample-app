@@ -6,50 +6,60 @@
 //  file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //  -------------------------------------------------------------------------
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'io.github.bmwcarit.RaCoPlugin'
+}
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.bmwgroup.ramsessample.fragments"
-        // at least sdk version 24 is needed because of java.util.concurrent.CompletableFuture support
-        minSdkVersion 24
-        // this is current project sdk version
-        targetSdkVersion 29
+        minSdk 26
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-    aaptOptions {
-        noCompress "ramses", "rlogic"
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
+    androidResources {
+        noCompress 'ramses', 'rlogic'
+    }
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation "androidx.fragment:fragment:1.2.0"
-    implementation 'com.google.android.material:material:1.1.0'
-    implementation "androidx.navigation:navigation-fragment-ktx:2.2.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.2.1"
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.fragment:fragment:1.5.2"
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.2"
     implementation "io.github.bmwcarit:ramses-aar:1.1.0"
 }
 
-apply plugin: 'io.github.bmwcarit.RaCoPlugin'
 
 raCoConfig {
     //UNCOMMENT the line below and the dependency at the bottom of the file after the path to RaCoHeadless is set.
