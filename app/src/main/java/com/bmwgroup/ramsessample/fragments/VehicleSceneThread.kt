@@ -23,6 +23,7 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
          */
         mCameraYaw?.set(mYawValue)
         mCameraPitch?.set(mPitchValue)
+        mCameraDistance?.set(mCamDistValue)
 
         /*
          * Open or close the doors based on bool value (also see input callbacks below)
@@ -57,11 +58,14 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
             mCameraViewportH = cameraScriptRootInput.getChild("Viewport").getChild("Height")
             mCameraYaw = cameraScriptRootInput.getChild("CraneGimbal").getChild("Yaw")
             mCameraPitch = cameraScriptRootInput.getChild("CraneGimbal").getChild("Pitch")
+            mCameraDistance = cameraScriptRootInput.getChild("CraneGimbal").getChild("Distance")
 
             val yawOutput = getLogicNodeRootOutput("SceneControls").getChild("CameraPerspective").getChild("Yaw")
             val pitchOutput = getLogicNodeRootOutput("SceneControls").getChild("CameraPerspective").getChild("Pitch")
+            val distanceOutput = getLogicNodeRootOutput("SceneControls").getChild("CameraPerspective").getChild("Distance")
             unlinkProperties(yawOutput, mCameraYaw)
             unlinkProperties(pitchOutput, mCameraPitch)
+            unlinkProperties(distanceOutput, mCameraDistance)
             mDoorL1 = doorsScriptRootInput.getChild("Door_F_L_OpeningValue")
             mDoorL2 = doorsScriptRootInput.getChild("Door_B_L_OpeningValue")
             mDoorR1 = doorsScriptRootInput.getChild("Door_F_R_OpeningValue")
@@ -134,6 +138,7 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
 
     private var mYawValue = 0f
     private var mPitchValue = 0f
+    private var mCamDistValue = 600f
     private var mPrevX = -1
     private var mPrevY = -1
     private var mTouchDownX = -1
@@ -146,6 +151,7 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
     private var mCameraViewportH: Property? = null
     private var mCameraYaw: Property? = null
     private var mCameraPitch: Property? = null
+    private var mCameraDistance: Property? = null
     private var mDoorL1: Property? = null
     private var mDoorL2: Property? = null
     private var mDoorR1: Property? = null
