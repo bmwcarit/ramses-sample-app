@@ -138,7 +138,7 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
 
     private var mYawValue = 0f
     private var mPitchValue = 0f
-    private var mCamDistValue = 600f
+    private var mCamDistValue = 1200f
     private var mPrevX = -1
     private var mPrevY = -1
     private var mTouchDownX = -1
