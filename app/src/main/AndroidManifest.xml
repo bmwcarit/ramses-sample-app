@@ -18,6 +18,9 @@
         android:roundIcon="@mipmap/ramseslogo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <profileable android:shell="true"/>
+
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
