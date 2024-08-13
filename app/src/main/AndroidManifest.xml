@@ -15,7 +15,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ramseslogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ramseslogo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" android:exported="true">
