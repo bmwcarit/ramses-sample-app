@@ -66,6 +66,7 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
             unlinkProperties(yawOutput, mCameraYaw)
             unlinkProperties(pitchOutput, mCameraPitch)
             unlinkProperties(distanceOutput, mCameraDistance)
+            mCarPaintId = doorsScriptRootInput.getChild("CarPaint_ID")
             mDoorL1 = doorsScriptRootInput.getChild("Door_F_L_OpeningValue")
             mDoorL2 = doorsScriptRootInput.getChild("Door_B_L_OpeningValue")
             mDoorR1 = doorsScriptRootInput.getChild("Door_F_R_OpeningValue")
@@ -157,4 +158,17 @@ class VehicleSceneThread(threadName: String?, context: Context?) : RamsesThread(
     private var mDoorR1: Property? = null
     private var mDoorR2: Property? = null
     private var mTrunk: Property? = null
+
+    private var mCarPaintId: Property? = null
+
+    /**
+     * Set the car paint (values 1..7 are available)
+     */
+    var carPaint: UInt
+        get() = mCarPaintId?.int?.toUInt() ?: 1u
+        set(value) {
+            addRunnableToThreadQueue {
+                mCarPaintId?.set(value.toInt())
+            }
+        }
 }

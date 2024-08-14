@@ -7,12 +7,12 @@
 //  -------------------------------------------------------------------------
 
 plugins {
-    id 'com.android.application' version '7.2.2' apply false
-    id 'com.android.library' version '7.2.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+    id 'com.android.application' version '8.5.2' apply false
+    id 'com.android.library' version '8.5.2' apply false
+    id 'org.jetbrains.kotlin.android' version '2.0.0' apply false
     id 'io.github.bmwcarit.RaCoPlugin' version '0.3.1' apply false
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete.class) {
+    delete(rootProject.layout.buildDirectory)
 }

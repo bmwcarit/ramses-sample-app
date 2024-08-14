@@ -10,32 +10,51 @@ package com.bmwgroup.ramsessample.fragments
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.SurfaceHolder
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.bmwgroup.ramsessample.fragments.databinding.FragmentCarBinding
 
 class FragmentCar : Fragment(), SurfaceHolder.Callback {
-    private var mView: View? = null
+    private var _binding: FragmentCarBinding? = null
+    /** Only valid between onCreateView() and onDestroyView()! */
+    private val binding: FragmentCarBinding get() = _binding!!
     private lateinit var mSceneThread: VehicleSceneThread
     companion object {
         const val MAX_CLICK_DURATION_MS = 200
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Only inflate the view, as it can not be relied upon that the view has been created yet
-        mView = inflater.inflate(R.layout.fragment_car, container, false)
-        return mView
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentCarBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mSceneThread = VehicleSceneThread("VehicleSceneThread", requireContext())
         // As the activity is not guaranteed to be created in the Fragments onCreate callback call RamsesThreads initRamsesThreadAndLoadScene here
-        mSceneThread.initRamsesThreadAndLoadScene(activity!!.assets, "G05.ramses", "G05.rlogic")
+        mSceneThread.initRamsesThreadAndLoadScene(requireActivity().assets, "G05.ramses", "G05.rlogic")
+
+        resources.getStringArray(R.array.car_paints).mapIndexed { index, carPaintName ->
+            Button(context).apply {
+                text = carPaintName
+                setOnClickListener {
+                    mSceneThread.carPaint = (index + 1).toUInt()
+                }
+            }
+        }.forEach { binding.buttonBar.addView(it) }
 
         // Add the addOnWindowFocusChangeListener as it is not supported by default by Fragments
-        mView!!.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
+        binding.root.viewTreeObserver.addOnWindowFocusChangeListener { hasFocus ->
             when(hasFocus)
             {
                 true -> if (mSceneThread.isAlive) startRendering()
@@ -44,8 +63,7 @@ class FragmentCar : Fragment(), SurfaceHolder.Callback {
         }
 
         // As it is certain that the view is created in the onViewCreated callback initialize the SurfaceView here
-        val surfaceView = mView!!.findViewById<SurfaceView>(R.id.surfaceView)
-        surfaceView.setOnTouchListener { _, event ->
+        binding.surfaceView.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> mSceneThread.onTouchDown(event.getX(0).toInt(), event.getY(0).toInt())
                 MotionEvent.ACTION_UP -> {
@@ -58,7 +76,7 @@ class FragmentCar : Fragment(), SurfaceHolder.Callback {
             }
             true
         }
-        surfaceView.holder.addCallback(this)
+        binding.surfaceView.holder.addCallback(this)
     }
 
     override fun onResume() {
@@ -82,6 +100,7 @@ class FragmentCar : Fragment(), SurfaceHolder.Callback {
         } catch (e: InterruptedException) {
             Log.e("FragmentCar", "onDestroyView failed: ", e)
         }
+        _binding = null
     }
 
     override fun surfaceCreated(surfaceHolder: SurfaceHolder) {

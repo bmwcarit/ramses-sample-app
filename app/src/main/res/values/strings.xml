@@ -6,4 +6,13 @@
 -->
 <resources>
     <string name="app_name">Ramses Sample Fragments</string>
+    <array name="car_paints"><!-- TODO: Use the real color names -->
+        <item>Color 1</item>
+        <item>Color 2</item>
+        <item>Color 3</item>
+        <item>Color 4</item>
+        <item>Color 5</item>
+        <item>Color 6</item>
+        <item>Color 7</item>
+    </array>
 </resources>
